@@ -21,6 +21,8 @@ add_executable(EPQ src/main.cpp
         src/samplers/sampler.h
         src/utility/RNG.cpp
         src/utility/RNG.h
+        src/samplers/stratifiedSampler.cpp
+        src/samplers/stratifiedSampler.h
 )
 target_include_directories(EPQ PRIVATE 3rdparty/stb_image)
 target_include_directories(EPQ PRIVATE src)
