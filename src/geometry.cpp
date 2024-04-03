@@ -30,3 +30,12 @@ Transform LookAt(const glm::vec3 &pos, const glm::vec3 &look,
 glm::vec3 Transform::operator()(const glm::vec3 &v) const {
   return glm::vec4(v, 1) * m;
 }
+
+Ray Transform::operator()(const Ray &r) const {
+  glm::vec3 oError = r.o;
+  glm::vec3 o = glm::vec4(r.o, 1) * m;
+  glm::vec3 d = glm::vec4(r.d, 0) * m;
+  return Ray(o, d, r.tMax, r.time);
+}
+
+float Lerp(float t, float v1, float v2) { return (1 - t) * v1 + t * v2; }

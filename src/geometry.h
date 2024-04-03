@@ -75,6 +75,7 @@ public:
     return Transform(t.mInv, t.m);
   }
   glm::vec3 operator()(const glm::vec3 &v) const;
+  Ray operator()(const Ray &r) const;
 
 public:
   glm::mat4 m;
@@ -89,6 +90,8 @@ Transform Rotate(float theta, const glm::vec3 &axis);
 
 Transform LookAt(const glm::vec3 &pos, const glm::vec3 &look,
                  const glm::vec3 &up);
+
+float Lerp(float t, float v1, float v2);
 
 #include <geometricOperations/transformations.h>
 
