@@ -93,6 +93,13 @@ Transform LookAt(const glm::vec3 &pos, const glm::vec3 &look,
 
 float Lerp(float t, float v1, float v2);
 
-#include <geometricOperations/transformations.h>
+inline Transform operator*(Transform t1, const Transform t2) {
+  return Transform(t1.m * t2.m, t2.mInv * t1.mInv);
+}
+
+inline Transform operator/(const Transform &t1, const Transform &t2) {
+  Transform t2Inv = Inverse(t2);
+  return Transform(t1.m * t2Inv.m, t2.mInv * t1.mInv);
+}
 
 #endif // EPQ_GEOMETRY_H

@@ -23,13 +23,13 @@
  * 10. Renderer
  *
  *
- * How the project will work for a very basic scene:
- * - The scene will be created with a camera, a light source, and a sphere.
- * (This could use an external file to describe the scene)
+ * How the project will work for a very basic Scene:
+ * - The Scene will be created with a camera, a light source, and a sphere.
+ * (This could use an external file to describe the Scene)
  * - The renderer will be created with a sampler, an integrators, and an
  * acceleration structure.
  * - The integrators will take a ray from the camera, and intersect it with the
- * scene.
+ * Scene.
  * - The integrators will then calculate the colour of the pixel based on the
  * intersection point.
  * - This will happen firstly by calculating the direct lighting, and then the
@@ -62,11 +62,21 @@
  *
  * */
 
+#include <integrators/integrator.h>
+
 int main() {
-  unsigned char *data = new unsigned char[3 * 256 * 256];
-  for (int i = 0; i < 3 * 256 * 256; i++) {
-    data[i] = 255;
-  }
-  writeImage("test.bmp", data, 256, 256, ImageFormat::BMP, ImageType::RGB);
+  // set up the scene
+  Scene scene;
+  orthographicCamera camera(Transform(), Bounds2f(), 0, 0, 0, 0);
+  stratifiedSampler sampler(200, 200, 2, 3);
+  uint32_t *data = new uint32_t[800 * 800];
+  testIntegrator integrator(&scene, &sampler, &camera, data);
+  integrator.Render(scene);
+
+  // write the image
+  // cast the data
+
+  const unsigned char *dataChar = reinterpret_cast<const unsigned char *>(data);
+  writeImage("test.bmp", dataChar, 256, 256, ImageFormat::BMP, ImageType::RGB);
   delete[] data;
 }

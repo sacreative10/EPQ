@@ -7,7 +7,7 @@
 #include <cameras/camera.h>
 #include <geometry.h>
 
-Transform Orthographic(float znear, float zfar) {
+inline Transform Orthographic(float znear, float zfar) {
   return Scale(1, 1, 1 / (zfar - znear)) * Translate(glm::vec3(0, 0, -znear));
 }
 
@@ -23,7 +23,7 @@ public:
     dxCamera = RasterToCamera(glm::vec3(1, 0, 0));
     dyCamera = RasterToCamera(glm::vec3(0, 1, 0));
   }
-  float GenerateRay(const CameraSample &sample, Ray *ray) const {
+  float generateRay(const CameraSample &sample, Ray *ray) const {
     glm::vec3 pFilm = glm::vec3(sample.pFilm.x, sample.pFilm.y, 0);
     glm::vec3 pCamera = RasterToCamera(pFilm);
     *ray = Ray(pCamera, glm::vec3(0, 0, 1), 0, INFINITY);
@@ -45,7 +45,7 @@ public:
   }
 
 public:
-  glm::vec3 dxCamera, dyCamera;
+  glm::vec3 dxCamera{}, dyCamera{};
 };
 
 #endif // EPQ_ORTHOGRAPHICCAMERA_H

@@ -14,8 +14,8 @@ struct CameraSample;
 
 class sampler {
 public:
-  virtual ~sampler();
-  sampler(int64_t samplesPerPixel);
+  ~sampler() {}
+  sampler(int64_t samplesPerPixel) : samplesPerPixel(samplesPerPixel) {}
   virtual void StartPixel(const glm::vec2 &p);
   virtual float Get1D() = 0;
   virtual glm::vec2 Get2D() = 0;

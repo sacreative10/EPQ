@@ -2,7 +2,7 @@
 // Created by sohaibalam on 03/04/24.
 //
 
-#include "primitives.h"
+#include "Primitives.h"
 bool sphere::Intersect(const Ray &ray, Intersection &intersection) {
   glm::vec3 oc = ray.o - center;
   float a = glm::dot(ray.d, ray.d);

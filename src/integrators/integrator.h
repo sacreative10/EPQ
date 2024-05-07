@@ -5,14 +5,27 @@
 #ifndef EPQ_INTEGRATOR_H
 #define EPQ_INTEGRATOR_H
 
-class Scene;
-
+#include <Scene.h>
+#include <cameras/orthographicCamera.h>
+#include <samplers/stratifiedSampler.h>
 class integrator {
 public:
-  virtual ~integrator();
-  virtual void Render(const Scene &scene) = 0;
+  ~integrator() {}
+  virtual void Render(Scene &scene) = 0;
 };
 
-class SamplerIntegrator : public integrator {};
+class testIntegrator : public integrator {
+public:
+  void Render(Scene &scene) override;
+  testIntegrator(Scene *scene, stratifiedSampler *sampler,
+                 orthographicCamera *camera, uint32_t *data)
+      : scene(scene), sampler(sampler), camera(camera), data(data) {}
+
+public:
+  Scene *scene;
+  stratifiedSampler *sampler;
+  orthographicCamera *camera;
+  uint32_t *data;
+};
 
 #endif // EPQ_INTEGRATOR_H

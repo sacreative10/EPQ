@@ -57,8 +57,8 @@ const glm::vec2 *sampler::Get2DArray(int n) {
 pixelSampler::pixelSampler(int64_t samplesPerPixel, int nSampledDimensions)
     : sampler(samplesPerPixel) {
   for (int i = 0; i < nSampledDimensions; ++i) {
-    samples1D.emplace_back(samplesPerPixel);
-    samples2D.emplace_back(samplesPerPixel);
+    samples1D.push_back(std::vector<float>(samplesPerPixel));
+    samples2D.push_back(std::vector<glm::vec2>(samplesPerPixel));
   }
 }
 

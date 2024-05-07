@@ -13,17 +13,17 @@ struct Intersection {
   float t;
 };
 
-class primitives {
+class Primitives {
 public:
-  primitives();
+  Primitives();
   virtual bool Intersect(const Ray &ray, Intersection &intersection) = 0;
 
-  ~primitives();
+  ~Primitives();
 
 private:
 };
 
-class sphere : public primitives {
+class sphere : public Primitives {
 public:
   sphere(const glm::vec3 &center, float radius)
       : center(center), radius(radius) {}
