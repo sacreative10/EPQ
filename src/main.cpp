@@ -64,9 +64,13 @@
 
 #include <integrators/integrator.h>
 
+#include <Primitives.h>
+
 int main() {
   // set up the scene
   Scene scene;
+    std::shared_ptr<sphere> Sphere = std::make_shared<sphere>(glm::vec3(5, 0, 0), 2);
+    scene.Add(Sphere);
   orthographicCamera camera(Transform(), Bounds2f(), 0, 0, 0, 0);
   stratifiedSampler sampler(200, 200, 2, 3);
   uint32_t *data = new uint32_t[800 * 800];
@@ -77,6 +81,6 @@ int main() {
   // cast the data
 
   const unsigned char *dataChar = reinterpret_cast<const unsigned char *>(data);
-  writeImage("test.bmp", dataChar, 256, 256, ImageFormat::BMP, ImageType::RGB);
+  writeImage("test.bmp", dataChar, 256, 256, ImageFormat::BMP, ImageType::RGBA);
   delete[] data;
 }

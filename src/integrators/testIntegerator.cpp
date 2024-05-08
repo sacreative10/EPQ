@@ -10,23 +10,12 @@
 
 #include <iostream>
 
-void progressBar(int x, int y, int i, int j) {
-  float progress = (float)(i * y + j) / (x * y);
-  int barWidth = 70;
 
-  std::cout << "[";
-  int pos = barWidth * progress;
-  for (int i = 0; i < barWidth; ++i) {
-    if (i < pos)
-      std::cout << "=";
-    else if (i == pos)
-      std::cout << ">";
-    else
-      std::cout << " ";
-  }
-  std::cout << "] " << int(progress * 100.0) << " %\r";
-  std::cout.flush();
+void generateRay(CameraSample sample, Ray& ray)
+{
+
 }
+
 // this integrator is just for testing purposes, if it hits
 // then the pixel is white otherwise black
 void testIntegrator::Render(Scene &scene) {
@@ -35,7 +24,7 @@ void testIntegrator::Render(Scene &scene) {
   sampler->Clone(24158789);
   for (int i = 0; i <= screenX; i++) {
     for (int j = 0; j <= screenY; j++) {
-      sampler->StartPixel(glm::vec2(i, j));
+      //sampler->StartPixel(glm::vec2(i, j));
       sample.pFilm = glm::vec2(i, j);
       Intersection intersection;
       Ray ray;
@@ -45,8 +34,7 @@ void testIntegrator::Render(Scene &scene) {
       } else {
         data[i * screenX + j] = 0xFF000000;
       }
-
-      std ::cout << "Pixel: " << i << " " << j << std::endl;
     }
+    std::cout << i << "\n";
   }
 }

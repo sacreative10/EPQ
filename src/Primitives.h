@@ -15,10 +15,11 @@ struct Intersection {
 
 class Primitives {
 public:
-  Primitives();
+  Primitives(){}
   virtual bool Intersect(const Ray &ray, Intersection &intersection) = 0;
 
-  ~Primitives();
+  ~Primitives()
+  {}
 
 private:
 };
